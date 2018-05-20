@@ -23,7 +23,7 @@ nav button {
 }
 
 .btn-primary > a {
-  text-decoration: none !important; /* no underline */
+  text-decoration: none !important;
   color: white !important;
 }
 
@@ -43,7 +43,11 @@ nav button {
 }
 
 .movie-details-info {
-  margin: 30px;
+  margin: 3%;
+}
+
+.movie-details-info img {
+  max-width: 25%;
 }
 
 .movie-details-info-text {
@@ -51,8 +55,8 @@ nav button {
 }
 
 .movie-details-info-text * {
-  margin-bottom: 10px;
-  max-width: 80%;
+  margin-bottom: 1%;
+  max-width: 70%;
 }
 
 .movie-details-info-text div {
@@ -60,5 +64,5 @@ nav button {
 }
 
 .movie-details .btn {
-  margin: 15px 0px 0px 15px;
+  margin: 2% 0px 0px 2%;
 }
