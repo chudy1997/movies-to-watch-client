@@ -8,6 +8,7 @@ class SignIn extends Component{
     CLIENT_ID = '524087473078-p1v8lbg0edsu6lhirkhav5c9flm8s4gp.apps.googleusercontent.com';
 
     handleSuccess = (response) => {
+        console.log(response);
         const userId = response.profileObj.googleId;
         this.props.signIn(userId);
         this.props.history.push('/');
@@ -21,6 +22,7 @@ class SignIn extends Component{
                     clientId={this.CLIENT_ID}
                     buttonText="Login with Google"
                     onSuccess={this.handleSuccess}
+                    onFailure={(e) => console.log(e)}
                 />
             </div>
         );
