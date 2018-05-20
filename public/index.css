@@ -1,0 +1,64 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  background-color: rgb(253, 253, 253) !important;
+}
+
+.sign-in {
+  padding: 50px 75px !important;
+  text-align: center;
+}
+
+nav{
+  display: flex;
+}
+
+nav button {
+  float: right;
+}
+
+.sign-in-info {
+  margin-bottom: 30px;
+}
+
+.btn-primary > a {
+  text-decoration: none !important; /* no underline */
+  color: white !important;
+}
+
+.search{
+  margin: 20px 100px !important;
+}
+
+.logged {
+  margin: 100px 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.movie {
+  cursor: pointer;
+}
+
+.movie-details-info {
+  margin: 30px;
+}
+
+.movie-details-info-text {
+  float: right;
+}
+
+.movie-details-info-text * {
+  margin-bottom: 10px;
+  max-width: 80%;
+}
+
+.movie-details-info-text div {
+  margin-bottom: 50px;
+}
+
+.movie-details .btn {
+  margin: 15px 0px 0px 15px;
+}

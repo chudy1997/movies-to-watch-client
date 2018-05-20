@@ -1,7 +1,10 @@
 import { combineReducers } from 'redux';
+import userMoviesReducer from './userMoviesReducer';
+import loggedUserReducer from './loggedUserReducer';
 
 const rootReducer = combineReducers({
-  state: (state = {}) => state
+  loggedUser: loggedUserReducer,
+  movies: userMoviesReducer,
 });
 
 export default rootReducer;
