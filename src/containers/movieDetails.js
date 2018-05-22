@@ -12,10 +12,12 @@ class MovieDetails extends Component {
     componentDidMount(){
         const { loggedUser } = this.props;
         const { id } = this.props.match.params;
-        const title = this.props.movie.title;
-        this.props.fetchMovie(loggedUser, title);
+        if(this.props.movie){
+            const title = this.props.movie.title;
+            this.props.fetchMovie(loggedUser, title);
+        }
     }
-
+    
     handleDeleteClick = () => {
         confirmAlert({
             title: 'Confirm to submit',
@@ -24,7 +26,7 @@ class MovieDetails extends Component {
                 {
                     label: 'Yes',
                     onClick: () => {
-                        const req = del('movie/delete', {
+                        const req = del('movies/delete', {
                             userId: this.props.loggedUser,
                             title: this.props.movie.title                            
                         })
@@ -71,11 +73,10 @@ class MovieDetails extends Component {
                         </div>
                         <div className='movie-details-info-ratings'>
                             <h6>Awards: {awards}</h6>
-                            {/* <h6>Ratings: </h6>
+                            <h6>Ratings: </h6>
                             <ul className='ratings'>
-                                {Ratings.map(rating => <li className='rating'>{rating.Source}: {rating.Value}</li>)}
-                            </ul> */}
-                            <h6>Ratings: {ratings}</h6>
+                                {JSON.parse(ratings).map(rating => <li className='rating'>{rating.Source}: {rating.Value}</li>)}
+                            </ul>
                         </div>
                         <h6>Plot: </h6>
                         <p>{plot}</p>

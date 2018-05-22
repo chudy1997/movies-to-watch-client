@@ -10,7 +10,7 @@ class Search extends Component{
     }
 
     handleSubmit = () => {
-        post('movie/new', {
+        post('movies/new', {
             userId: this.props.loggedUser,
             title: this.state.term
         })
