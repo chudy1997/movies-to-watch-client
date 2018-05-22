@@ -53,11 +53,11 @@ nav button {
 
 .movie-details-info-text {
   float: right;
+  max-width: 76%;
 }
 
 .movie-details-info-text * {
   margin-bottom: 1%;
-  max-width: 76%;
 }
 
 .movie-details-info-text div {
