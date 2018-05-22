@@ -1,19 +1,19 @@
 import React from 'react';
 
 export default function Movie(props) {
-    const { Id, Title, Year, Runtime, Genre } = props;
+    const { id, title, year, runtime, genre } = props;
     return (
         <tr 
             className='movie'
-            key={Title} 
+            key={id} 
             onClick={() => {
-                props.history.push(`/movies/${Id}`)
+                props.history.push(`/movies/${id}`)
             }}
         >
-            <td>{Title}</td>
-            <td>{Year}</td>
-            <td>{Runtime}</td>
-            <td>{Genre}</td>
+            <td>{title}</td>
+            <td>{year}</td>
+            <td>{runtime}</td>
+            <td>{genre}</td>
         </tr>
     ) 
 }

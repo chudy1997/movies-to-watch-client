@@ -9,7 +9,7 @@ import { fetchMovies } from './../actions';
 
 class Movies extends Component {
     componentDidMount(){
-        this.props.fetchMovies();
+        this.props.fetchMovies(this.props.loggedUser);
     }
 
     showMovies = () => {
@@ -28,7 +28,7 @@ class Movies extends Component {
             
         return (
             <div className='form-group-lg'>
-                <Search />
+                <Search/>
                 <table className='table table-hover'>
                     <thead>
                         <tr>

@@ -5,12 +5,12 @@ import { FETCH_MOVIES, FETCH_MOVIE } from './../actions';
 export default function(state = {}, action) {
     switch(action.type){
         case FETCH_MOVIES:
-            return _.mapKeys(action.payload.data, 'Id');
+            return _.mapKeys(action.payload.data, 'id');
         case FETCH_MOVIE:
             const data = action.payload.data;
             return {
                 ...state,
-                [data.Id]: data
+                [data.id]: data
             }
         default: 
             return state;
