@@ -5,16 +5,14 @@ import { Link } from 'react-router-dom';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 
-import { fetchMovie } from './../actions';
+import { fetchMovies } from './../actions';
 import { del } from './../axios';
 
 class MovieDetails extends Component {
     componentDidMount(){
         const { loggedUser } = this.props;
-        const { id } = this.props.match.params;
-        if(this.props.movie){
-            const title = this.props.movie.title;
-            this.props.fetchMovie(loggedUser, title);
+        if(!this.props.movie){
+            this.props.fetchMovies(loggedUser);
         }
     }
     
@@ -26,7 +24,7 @@ class MovieDetails extends Component {
                 {
                     label: 'Yes',
                     onClick: () => {
-                        const req = del('movies/delete', {
+                        del('movies/delete', {
                             userId: this.props.loggedUser,
                             title: this.props.movie.title                            
                         })
@@ -51,13 +49,13 @@ class MovieDetails extends Component {
         if(!this.props.movie)
             return (<div>Loading...</div>);
 
-        const { id, title, poster, year, runtime, genre, director, production, website, actors, ratings, awards, plot } = this.props.movie;
+        const { title, poster, year, runtime, genre, director, production, website, actors, ratings, awards, plot } = this.props.movie;
         return (
             <div className='movie-details'>
                 <Link className='btn btn-primary' to='/movies'>Go back to movies</Link>
                 <button className='btn btn-danger' onClick={this.handleDeleteClick}>Remove</button>
                 <div className='movie-details-info'>
-                    <img src={poster} width='400' class="float-right" />
+                    <img src={poster} width='400' class="float-right" alt={`Poster of '${title}'`} />
                     <div className='movie-details-info-text'>
                         <div className='movie-details-info-main'>
                             <h1>Title: '{title}'</h1>
@@ -92,5 +90,5 @@ const mapStateToProps = ({ loggedUser, movies }, ownProps) => ({
     loggedUser: loggedUser
 });
 
-export default connect(mapStateToProps, { fetchMovie })(MovieDetails);
+export default connect(mapStateToProps, { fetchMovies })(MovieDetails);
 

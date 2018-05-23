@@ -22,6 +22,8 @@ class SignIn extends Component{
                     buttonText="Login with Google"
                     onSuccess={this.handleSuccess}
                     onFailure={(e) => console.log(e)}
+                    isSignedIn={true}
+                    prompt='select_account'
                 />
             </div>
         );

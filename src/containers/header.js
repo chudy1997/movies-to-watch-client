@@ -23,7 +23,7 @@ class Header extends Component{
     render(){
         console.log(this.props.location.pathname);
         return (
-            <nav class="navbar navbar-dark bg-primary">
+            <nav className="navbar navbar-dark bg-primary">
                 <Link className='navbar-brand' to='/'>Movies to watch</Link>
                 {this.renderLogout()}
             </nav>
