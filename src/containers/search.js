@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { post } from './../axios';
+import { NotificationManager } from 'react-notifications'; 
 
 import { fetchMovies } from './../actions';
 
@@ -11,11 +12,17 @@ class Search extends Component{
 
     handleSubmit = () => {
         post('movies/new', {
-            userId: this.props.loggedUser,
+            token: this.props.loggedUserToken,
             title: this.state.term
         })
         .then(res => {
-            this.props.fetchMovies(this.props.loggedUser);
+            if(res.data === 'BAD_REQUEST'){
+                NotificationManager.warning('Movie with such title does not exist.');
+                return;
+            }
+
+            NotificationManager.success('Movie successfully added.');
+            this.props.fetchMovies(this.props.loggedUserToken);
             this.setState({ term: '' });
         });
     }
@@ -33,7 +40,7 @@ class Search extends Component{
 }
 
 const mapStateToProps = (state) => ({
-    loggedUser: state.loggedUser
+    loggedUserToken: state.loggedUser
 });
 
 export default connect(mapStateToProps, { fetchMovies } )(Search);

@@ -9,7 +9,7 @@ import { fetchMovies } from './../actions';
 
 class Movies extends Component {
     componentDidMount(){
-        this.props.fetchMovies(this.props.loggedUser);
+        this.props.fetchMovies(this.props.loggedUserToken);
     }
 
     showMovies = () => {
@@ -17,8 +17,8 @@ class Movies extends Component {
     }
 
     render = () => {
-        const { loggedUser } = this.props;
-        if(loggedUser === -1){
+        const { loggedUserToken } = this.props;
+        if(loggedUserToken === null){
             this.props.history.push('/');
             return (
                 <div>
@@ -32,6 +32,7 @@ class Movies extends Component {
                 <table className='table table-hover'>
                     <thead>
                         <tr>
+                            <th></th>
                             <th>Title</th>
                             <th>Year</th>
                             <th>Runtime</th>
@@ -39,7 +40,7 @@ class Movies extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {_.map(this.props.movies, movie => (<Movie history={this.props.history} {...movie}/>))}
+                        {_.map(this.props.movies, movie => (<Movie key={movie.movieJSON.id} history={this.props.history} movie={movie} />))}
                     </tbody>
                 </table>
             </div>
@@ -48,7 +49,7 @@ class Movies extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    loggedUser: state.loggedUser,
+    loggedUserToken: state.loggedUser,
     movies: state.movies
 });
 

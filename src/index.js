@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import ReduxPromise from 'redux-promise';
+import { NotificationContainer } from 'react-notifications';
 
 import registerServiceWorker from './registerServiceWorker';
 import Header from './containers/header';
@@ -18,6 +19,7 @@ ReactDOM.render(
   <Provider store={createStoreWithMiddleware(reducers)}>
     <BrowserRouter>
       <div className='app'>
+        <NotificationContainer />
         <Route path='/' component={Header} />
         <Switch>
           <Route path='/movies/:id' component={MovieDetails} />

@@ -2,17 +2,25 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { GoogleLogout } from 'react-google-login';
+import { NotificationManager } from 'react-notifications'; 
 
-import { logOut } from './../actions'
+import { logOut } from './../actions';
+import { post } from './../axios';
 
 class Header extends Component{
     logOut = () => {
-        this.props.logOut();
-        this.props.history.push('/');
+        const req = post('logout', {
+            token: this.props.loggedUserToken
+        })
+        .then(token => {
+            NotificationManager.success('Successfully logged out.');
+            this.props.logOut();
+            this.props.history.push('/');;
+        });
     }
 
     renderLogout = () => {
-        return this.props.loggedUser !== -1 ? (
+        return this.props.loggedUserToken !== null ? (
             <GoogleLogout
                 buttonText="Log out"
                 onLogoutSuccess={this.logOut}
@@ -21,7 +29,6 @@ class Header extends Component{
     }
 
     render(){
-        console.log(this.props.location.pathname);
         return (
             <nav className="navbar navbar-dark bg-primary">
                 <Link className='navbar-brand' to='/'>Movies to watch</Link>
@@ -32,7 +39,7 @@ class Header extends Component{
 }
 
 const mapStateToProps = (state) => ({
-    loggedUser: state.loggedUser
+    loggedUserToken: state.loggedUser
 });
 
 export default connect(mapStateToProps, { logOut })(Header);

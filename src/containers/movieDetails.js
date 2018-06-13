@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { NotificationManager } from 'react-notifications'; 
 
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
@@ -10,9 +11,9 @@ import { del } from './../axios';
 
 class MovieDetails extends Component {
     componentDidMount(){
-        const { loggedUser } = this.props;
+        const { loggedUserToken } = this.props;
         if(!this.props.movie){
-            this.props.fetchMovies(loggedUser);
+            this.props.fetchMovies(loggedUserToken);
         }
     }
     
@@ -25,10 +26,11 @@ class MovieDetails extends Component {
                     label: 'Yes',
                     onClick: () => {
                         del('movies/delete', {
-                            userId: this.props.loggedUser,
-                            title: this.props.movie.title                            
+                            token: this.props.loggedUserToken,
+                            title: this.props.movie.movieJSON.title                            
                         })
                         .then(res => {
+                            NotificationManager.success('Movie successfully deleted.');
                             this.props.history.push('/movies');
                         });
                     }
@@ -41,7 +43,7 @@ class MovieDetails extends Component {
     }
     
     render(){
-        if(this.props.loggedUser === -1){
+        if(this.props.loggedUserToken === null){
             this.props.history.push('/');
             return (<div></div>);
         }
@@ -49,7 +51,7 @@ class MovieDetails extends Component {
         if(!this.props.movie)
             return (<div>Loading...</div>);
 
-        const { title, poster, year, runtime, genre, director, production, website, actors, ratings, awards, plot } = this.props.movie;
+        const { title, poster, year, runtime, genre, director, production, website, actors, ratings, awards, plot } = this.props.movie.movieJSON;
         return (
             <div className='movie-details'>
                 <Link className='btn btn-primary' to='/movies'>Go back to movies</Link>
@@ -87,7 +89,7 @@ class MovieDetails extends Component {
 
 const mapStateToProps = ({ loggedUser, movies }, ownProps) => ({
     movie: movies[ownProps.match.params.id],
-    loggedUser: loggedUser
+    loggedUserToken: loggedUser
 });
 
 export default connect(mapStateToProps, { fetchMovies })(MovieDetails);
