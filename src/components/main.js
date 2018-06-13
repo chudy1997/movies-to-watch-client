@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import SignIn from './signIn';
-import Logged from './../components/logged';
+import Logged from './logged';
 
 class Main extends Component{
     render(){

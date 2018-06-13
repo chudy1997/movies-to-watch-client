@@ -9,7 +9,7 @@ import { post } from './../axios';
 
 class Header extends Component{
     logOut = () => {
-        const req = post('logout', {
+        post('logout', {
             token: this.props.loggedUserToken
         })
         .then(token => {

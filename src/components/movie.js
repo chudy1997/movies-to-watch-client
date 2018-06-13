@@ -27,7 +27,7 @@ class Movie extends Component {
                     this.props.history.push(`/movies/${id}`)
                 }}
             >
-                <td><input className="watched-checkbox" type="checkbox" checked={this.props.movie.status} onClick={this.handleClick} /></td>
+                <td style={{width: "20px"}}><input className="watched-checkbox" type="checkbox" checked={this.props.movie.status} onClick={this.handleClick} /></td>
                 <td>{title}</td>
                 <td>{year}</td>
                 <td>{runtime}</td>

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 
-import Movie from './../components/movie';
+import Movie from './movie';
 import Search from './search';
 
 import { fetchMovies } from './../actions';

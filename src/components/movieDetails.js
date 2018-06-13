@@ -57,7 +57,7 @@ class MovieDetails extends Component {
                 <Link className='btn btn-primary' to='/movies'>Go back to movies</Link>
                 <button className='btn btn-danger' onClick={this.handleDeleteClick}>Remove</button>
                 <div className='movie-details-info'>
-                    <img src={poster} width='400' class="float-right" alt={`Poster of '${title}'`} />
+                    <img src={poster} width='400' className="float-right" alt={`Poster of '${title}'`} />
                     <div className='movie-details-info-text'>
                         <div className='movie-details-info-main'>
                             <h1>Title: '{title}'</h1>
@@ -75,7 +75,7 @@ class MovieDetails extends Component {
                             <h6>Awards: {awards}</h6>
                             <h6>Ratings: </h6>
                             <ul className='ratings'>
-                                {JSON.parse(ratings).map(rating => <li className='rating'>{rating.Source}: {rating.Value}</li>)}
+                                {JSON.parse(ratings).map(rating => <li key={rating.Source} className='rating'>{rating.Source}: {rating.Value}</li>)}
                             </ul>
                         </div>
                         <h6>Plot: </h6>

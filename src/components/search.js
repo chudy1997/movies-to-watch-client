@@ -29,12 +29,12 @@ class Search extends Component{
 
     render(){
         return (
-            <div className='input-group search'>
+            <form className='input-group search' onSubmit={e => e.preventDefault()}>
                 <input type='text' className='form-control input-lg btn-lg' placeholder='Type title of movie...' value={this.state.term} onChange={(e) => this.setState({ term: e.target.value } )}/>
                 <span className='input-group-btn'>
                     <button type='submit' className='btn btn-secondary btn-lg' onClick={this.handleSubmit}>Submit</button>
                 </span>
-            </div>
+            </form>
         );
     }
 }

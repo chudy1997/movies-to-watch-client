@@ -7,10 +7,10 @@ import ReduxPromise from 'redux-promise';
 import { NotificationContainer } from 'react-notifications';
 
 import registerServiceWorker from './registerServiceWorker';
-import Header from './containers/header';
-import Main from './containers/main';
-import Movies from './containers/movies';
-import MovieDetails from './containers/movieDetails';
+import Header from './components/header';
+import Main from './components/main';
+import Movies from './components/movies';
+import MovieDetails from './components/movieDetails';
 import reducers from './reducers';
 
 const createStoreWithMiddleware = applyMiddleware(ReduxPromise)(createStore);
