@@ -33,7 +33,7 @@ class SignIn extends Component{
                     onSuccess={this.handleSuccess}
                     onFailure={(e) => console.log(e)}
                     isSignedIn={true}
-                    disabled={!this.props.loading}
+                    disabled={this.props.loading}
                     prompt='select_account'
                 />
             </div>
