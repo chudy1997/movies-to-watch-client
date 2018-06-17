@@ -11,6 +11,7 @@ class SignIn extends Component{
     handleSuccess = (response) => {
         const token = response.getAuthResponse().id_token;
 
+        this.props.changeLoading(true);
         post('login', {
             token: token
         })
@@ -29,7 +30,6 @@ class SignIn extends Component{
                 <GoogleLogin
                     clientId={config.CLIENT_ID ? config.CLIENT_ID : process.env.REACT_APP_CLIENT_ID}
                     buttonText="Login with Google"
-                    onRequest={() => this.props.changeLoading(true)}
                     onSuccess={this.handleSuccess}
                     onFailure={(e) => console.log(e)}
                     isSignedIn={true}
