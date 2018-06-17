@@ -17,7 +17,7 @@ class Search extends Component{
             title: this.state.term
         })
         .then(res => {
-            this.props.changeLoading(true);
+            this.props.changeLoading(false);
             if(res.status === 400){
                 NotificationManager.warning(res.data);
                 return;

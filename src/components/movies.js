@@ -9,6 +9,10 @@ import { fetchMovies, changeLoading } from './../actions';
 
 class Movies extends Component {
     componentDidMount(){
+        window.onbeforeunload = (e) => {
+            this.props.history.push('/');
+        };
+
         this.props.changeLoading(true);
         this.props.fetchMovies(this.props.loggedUserToken)
             .then(() => this.props.changeLoading(false));

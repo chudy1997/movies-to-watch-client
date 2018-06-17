@@ -12,11 +12,6 @@ export function get(url, payload){
 }
 
 export function post(url, payload){
-    console.log("Debugging");
-    console.log(config.REACT_APP_SERVER_URL);
-    console.log("Debugging");
-    console.log(process.env.REACT_APP_SERVER_URL);
-
     return axios({
         method: 'post',
         url: `${ROOT_URL}/${url}`,
