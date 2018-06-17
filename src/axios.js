@@ -1,4 +1,5 @@
 import axios from 'axios';
+import config from './config.json';
 
 const ROOT_URL = config.SERVER_URL ? config.SERVER_URL : process.env.SERVER_URL;
 
