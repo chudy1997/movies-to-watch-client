@@ -9,14 +9,14 @@ import { post } from './../axios';
 
 class SignIn extends Component{
     handleSuccess = (response) => {
-        const userId = response.profileObj.googleId;
+        const token = response.getAuthResponse().id_token;
 
         post('login', {
-            userId: userId
+            token: token
         })
         .then(resp => {
             NotificationManager.success('Successfully logged in.');
-            this.props.signIn(resp.data);
+            this.props.signIn(token);
             this.props.history.push('/');
         });
     }
