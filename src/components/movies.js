@@ -5,15 +5,13 @@ import _ from 'lodash';
 import Movie from './movie';
 import Search from './search';
 
-import { fetchMovies } from './../actions';
+import { fetchMovies, changeLoading } from './../actions';
 
 class Movies extends Component {
     componentDidMount(){
-        this.props.fetchMovies(this.props.loggedUserToken);
-    }
-
-    showMovies = () => {
-        return ;
+        this.props.changeLoading(true);
+        this.props.fetchMovies(this.props.loggedUserToken)
+            .then(() => this.props.changeLoading(false));
     }
 
     render = () => {
@@ -53,4 +51,4 @@ const mapStateToProps = (state) => ({
     movies: state.movies
 });
 
-export default connect(mapStateToProps, { fetchMovies })(Movies);
+export default connect(mapStateToProps, { fetchMovies, changeLoading })(Movies);

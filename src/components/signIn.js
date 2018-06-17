@@ -4,7 +4,7 @@ import GoogleLogin from 'react-google-login';
 import { NotificationManager } from 'react-notifications'; 
 
 import config from './../config.json';
-import { signIn } from './../actions';
+import { signIn, changeLoading } from './../actions';
 import { post } from './../axios';
 
 class SignIn extends Component{
@@ -17,6 +17,7 @@ class SignIn extends Component{
         .then(resp => {
             NotificationManager.success('Successfully logged in.');
             this.props.signIn(token);
+            this.props.changeLoading(false);
             this.props.history.push('/');
         });
     }
@@ -26,11 +27,13 @@ class SignIn extends Component{
             <div className='sign-in'>
                 <h3 className='sign-in-info'>You are not logged in yet...</h3>
                 <GoogleLogin
-                    clientId={process.env.REACT_APP_CLIENT_ID ? process.env.REACT_APP_CLIENT_ID : config.CLIENT_ID}
+                    clientId={config.CLIENT_ID ? config.CLIENT_ID : process.env.REACT_APP_CLIENT_ID}
                     buttonText="Login with Google"
+                    onRequest={() => this.props.changeLoading(true)}
                     onSuccess={this.handleSuccess}
                     onFailure={(e) => console.log(e)}
                     isSignedIn={true}
+                    disabled={!this.props.loading}
                     prompt='select_account'
                 />
             </div>
@@ -38,4 +41,8 @@ class SignIn extends Component{
     }
 }
 
-export default connect(null, { signIn })(SignIn);
+const mapStateToProps = (state) => ({
+    loading: state.loading
+});
+
+export default connect(mapStateToProps, { signIn, changeLoading })(SignIn);

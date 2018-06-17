@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-const ROOT_URL = 'https://pure-fortress-90056.herokuapp.com';
+// const ROOT_URL = 'https://pure-fortress-90056.herokuapp.com';
+const ROOT_URL = 'http://localhost:9000';
 
 export function get(url, payload){
     return axios({

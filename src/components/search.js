@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { post } from './../axios';
 import { NotificationManager } from 'react-notifications'; 
 
-import { fetchMovies } from './../actions';
+import { fetchMovies, changeLoading } from './../actions';
 
 class Search extends Component{
     state = {
@@ -11,11 +11,13 @@ class Search extends Component{
     }
 
     handleSubmit = () => {
+        this.props.changeLoading(true);
         post('movies/new', {
             token: this.props.loggedUserToken,
             title: this.state.term
         })
         .then(res => {
+            this.props.changeLoading(true);
             if(res.status === 400){
                 NotificationManager.warning(res.data);
                 return;
@@ -47,4 +49,4 @@ const mapStateToProps = (state) => ({
     loggedUserToken: state.loggedUser
 });
 
-export default connect(mapStateToProps, { fetchMovies } )(Search);
+export default connect(mapStateToProps, { fetchMovies, changeLoading } )(Search);

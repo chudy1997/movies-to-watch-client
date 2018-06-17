@@ -5,6 +5,7 @@ export const LOG_OUT = 'LOG_OUT';
 export const FETCH_MOVIE = 'FETCH_MOVIE';
 export const FETCH_MOVIES = 'FETCH_MOVIES';
 export const CHECK_MOVIE = 'CHECK_MOVIE';
+export const LOAD = 'LOAD';
 
 export const signIn = (token) => {
     return {
@@ -68,5 +69,13 @@ export const checkMovie = (token, movie) => {
     return {
         type: FETCH_MOVIE,
         payload: { data: movie }
+    }
+}
+
+export const changeLoading = (loading) => {
+    document.body.style.pointerEvents = loading ? 'none' : 'all';
+    return {
+        type: LOAD,
+        payload: loading
     }
 }
