@@ -26,7 +26,7 @@ class SignIn extends Component{
             <div className='sign-in'>
                 <h3 className='sign-in-info'>You are not logged in yet...</h3>
                 <GoogleLogin
-                    clientId={process.env.CLIENT_ID ? process.env.CLIENT_ID : config.CLIENT_ID}
+                    clientId={process.env.REACT_APP_CLIENT_ID ? process.env.REACT_APP_CLIENT_ID : config.CLIENT_ID}
                     buttonText="Login with Google"
                     onSuccess={this.handleSuccess}
                     onFailure={(e) => console.log(e)}
