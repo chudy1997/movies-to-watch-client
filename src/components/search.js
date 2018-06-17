@@ -16,9 +16,13 @@ class Search extends Component{
             title: this.state.term
         })
         .then(res => {
-            if(res.data === 'BAD_REQUEST'){
-                NotificationManager.warning('Movie with such title does not exist.');
+            if(res.status === 400){
+                NotificationManager.warning(res.data);
                 return;
+            }
+            else if(res.status === 208){
+                NotificationManager.warning(res.data);
+                return;                
             }
 
             NotificationManager.success('Movie successfully added.');
