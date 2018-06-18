@@ -40,22 +40,18 @@ export const fetchMovie = (token, title) => {
     }
 }
 
-export const fetchMovies = (token) => {
-    if(!token)
-        return {
-            type: FETCH_MOVIES, 
-            payload: {
-                data: []
-            }
-        };
-
-    const req = get('movies', {
-        token: token
-    });
-
+export const fetchMovies = (token, movies) => {
     return {
         type: FETCH_MOVIES,
-        payload: req
+        payload: movies ? {
+            data: movies
+        }
+        : !token ? {
+            data: []
+        } 
+        : get('movies', {
+            token: token
+        })
     }
 }
 

@@ -6,7 +6,7 @@ import { NotificationManager } from 'react-notifications';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 
-import { fetchMovies } from './../actions';
+import { fetchMovies, changeLoading } from './../actions';
 import { del } from './../axios';
 
 class MovieDetails extends Component {
@@ -25,11 +25,13 @@ class MovieDetails extends Component {
                 {
                     label: 'Yes',
                     onClick: () => {
+                        this.props.changeLoading(true);
                         del('movies/delete', {
                             token: this.props.loggedUserToken,
                             title: this.props.movie.movieJSON.title                            
                         })
                         .then(res => {
+                            this.props.changeLoading(false);
                             NotificationManager.success('Movie successfully deleted.');
                             this.props.history.push('/movies');
                         });
@@ -92,5 +94,5 @@ const mapStateToProps = ({ loggedUser, movies }, ownProps) => ({
     loggedUserToken: loggedUser
 });
 
-export default connect(mapStateToProps, { fetchMovies })(MovieDetails);
+export default connect(mapStateToProps, { fetchMovies, changeLoading })(MovieDetails);
 

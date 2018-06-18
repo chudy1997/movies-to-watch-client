@@ -17,12 +17,7 @@ class Search extends Component{
             title: this.state.term
         })
         .then(res => {
-            this.props.changeLoading(false);
-            if(res.status === 400){
-                NotificationManager.warning(res.data);
-                return;
-            }
-            else if(res.status === 208){
+            if(res.status === 208){
                 NotificationManager.warning(res.data);
                 return;                
             }
@@ -30,6 +25,15 @@ class Search extends Component{
             NotificationManager.success('Movie successfully added.');
             this.props.fetchMovies(this.props.loggedUserToken);
             this.setState({ term: '' });
+        })
+        .catch(({response}) => {
+            if(response.status === 400){
+                NotificationManager.warning(response.data);
+                return;
+            }
+        })
+        .finally(() => {
+            this.props.changeLoading(false);   
         });
     }
 
